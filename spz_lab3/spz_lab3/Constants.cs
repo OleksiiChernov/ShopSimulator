@@ -12,6 +12,8 @@ namespace spz_lab3
         {
             public const int MinTradePrice = 1;
             public const int MaxTradePrice = 200;
+            public const int MinProductCount = 1;
+            public const int MaxProductCount = 100;
             public static readonly List<string> ProductNames = new List<string>
             {
                 "Pen", "Table", "Powerbank", "Iphone", "Laptop", "Lamp", "Mirror", "Toy",
@@ -44,6 +46,7 @@ namespace spz_lab3
 
         public const int MinThreadSleep = 5000;
         public const int MaxThreadSleep = 60000;
-
+        public const int TimerBaseTime = 150000;
+        public const int BaseCash = 10000;
     }
 }

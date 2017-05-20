@@ -16,6 +16,18 @@ namespace spz_lab3.Models
             return new Product(Constants.Products.GetRandomProductName(), tradePrice, retailPrice);
         }
 
+        public static Product GenerateNewProduct(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                name = Constants.Products.GetRandomProductName();
+            }
+            Random r = new Random();
+            float tradePrice = r.Next(Constants.Products.MinTradePrice, Constants.Products.MaxTradePrice);
+            float retailPrice = tradePrice * (float)(1.0f + r.NextDouble());
+            return new Product(name, tradePrice, retailPrice);
+        }
+
         /// <summary>
         /// Create new instance of <see cref="Product"/>
         /// </summary>

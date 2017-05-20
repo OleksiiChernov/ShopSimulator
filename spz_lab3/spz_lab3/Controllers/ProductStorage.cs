@@ -60,5 +60,22 @@ namespace spz_lab3.Controllers
             return _availableProducts;
         }
 
+        public void FillStorage()
+        {
+            if (null == _availableProducts)
+            {
+                _availableProducts = new List<Product>();
+            }
+            List<string> productNames = Constants.Products.ProductNames;
+
+            Random r = new Random();
+            foreach (var product in productNames)
+            {
+                int count = r.Next(Constants.Products.MinProductCount, Constants.Products.MaxProductCount);
+                _availableProducts.AddRange(Enumerable.Repeat(Product.GenerateNewProduct(product), count));
+            }
+
+        }
+
     }
 }
