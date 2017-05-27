@@ -77,5 +77,8 @@ namespace spz_lab3.Controllers
 
         }
 
+
+        public EventHandler<NewLogEventArgs> OnNewLog { get; set; }
+
     }
 }

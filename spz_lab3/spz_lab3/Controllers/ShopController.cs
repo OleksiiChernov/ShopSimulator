@@ -13,6 +13,16 @@ namespace spz_lab3.Controllers
         Inventory
     }
 
+    public class NewLogEventArgs : EventArgs
+    {
+        public NewLogEventArgs(string message)
+        {
+            Message = message;
+        }
+
+        public string Message { get; private set; }
+    }
+
     public class ShopController
     {
 
@@ -36,6 +46,7 @@ namespace spz_lab3.Controllers
         {
             _mode = ShopMode.Normal;
             _storageController = new ProductStorage();
+            _storageController.OnNewLog += (sender, args) => OnNewLogGenerated(this, args); 
             _cash = Constants.BaseCash;
             _customers = new List<Customer>();
             _normalModeSimulator = new Task(NormalModeSimulation);
@@ -162,6 +173,8 @@ namespace spz_lab3.Controllers
 
         #endregion
 
-        public ShopController Instance => _instance ?? (_instance = new ShopController());
+        public static ShopController Instance => _instance ?? (_instance = new ShopController());
+
+        public EventHandler<NewLogEventArgs> OnNewLogGenerated { get; set; }
     }
 }
