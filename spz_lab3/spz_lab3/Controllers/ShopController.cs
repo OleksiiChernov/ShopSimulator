@@ -1,6 +1,7 @@
 ﻿using spz_lab3.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
@@ -54,6 +55,19 @@ namespace spz_lab3.Controllers
             InitTimer();
         }
 
+        public void UpdateValues()
+        {
+            if (null != OnModeChanged)
+            {
+                string mode = _mode == ShopMode.Normal ? Constants.NormalModeName : Constants.InventoryModeName;
+                OnModeChanged(this, new NewLogEventArgs(mode));
+            }
+            if (null != OnCashChanged)
+            {
+                OnCashChanged(this, new NewLogEventArgs(_cash.ToString()));
+            }
+        }
+
         public void SetMode(ShopMode mode)
         {
             StartTask(mode);
@@ -77,7 +91,12 @@ namespace spz_lab3.Controllers
                 {
                     _customers = new List<Customer>();
                 }
-                _customers.Add(customer);
+                if (!_customers.Contains(customer))
+                {
+                    _customers.Add(customer);
+                }
+                Product prod = customer.Items.Last();
+                InitNewLog(customer.Name + " buy " + prod.Name + " for " + prod.RetailPrice);
             }
         }
 
@@ -100,6 +119,7 @@ namespace spz_lab3.Controllers
             {
                 _cash += product.RetailPrice;
             }
+            UpdateValues();
             return product;
         }
 
@@ -116,7 +136,10 @@ namespace spz_lab3.Controllers
                 _storageController = new ProductStorage();
             }
             _storageController.AddProduct(product);
+            InitNewLog("Added " + product.Name + " to storage for " + product.TradePrice);
             _cash -= product.TradePrice;
+
+            UpdateValues();
         }
 
         private void InitTask(ShopMode mode)
@@ -144,6 +167,13 @@ namespace spz_lab3.Controllers
             InitTask(mode);
             taskToStart.Start();
             InitTimer();
+
+            string modeName = mode == ShopMode.Normal ? Constants.NormalModeName : Constants.InventoryModeName;
+            if (null != OnModeChanged)
+            {
+                OnModeChanged(this, new NewLogEventArgs(modeName));
+            }
+            InitNewLog("Set mode: " + modeName);
         }
 
         private void InitTimer()
@@ -171,10 +201,20 @@ namespace spz_lab3.Controllers
             SetMode(_mode);
         }
 
+        private void InitNewLog(string message)
+        {
+            if (null != OnNewLogGenerated && !string.IsNullOrWhiteSpace(message))
+            {
+                OnNewLogGenerated(this, new NewLogEventArgs(message));
+            }
+        }
+
         #endregion
 
         public static ShopController Instance => _instance ?? (_instance = new ShopController());
 
         public EventHandler<NewLogEventArgs> OnNewLogGenerated { get; set; }
+        public EventHandler<NewLogEventArgs> OnModeChanged { get; set; }
+        public EventHandler<NewLogEventArgs> OnCashChanged { get; set; }
     }
 }

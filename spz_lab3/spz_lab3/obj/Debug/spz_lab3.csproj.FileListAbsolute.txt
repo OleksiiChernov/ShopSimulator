@@ -3,7 +3,7 @@ E:\projects\lab3_spz\spz_lab3\spz_lab3\bin\Debug\spz_lab3.exe
 E:\projects\lab3_spz\spz_lab3\spz_lab3\bin\Debug\spz_lab3.pdb
 E:\projects\lab3_spz\spz_lab3\spz_lab3\obj\Debug\spz_lab3.csprojResolveAssemblyReference.cache
 E:\projects\lab3_spz\spz_lab3\spz_lab3\obj\Debug\spz_lab3.Properties.Resources.resources
-E:\projects\lab3_spz\spz_lab3\spz_lab3\obj\Debug\spz_lab3.Form1.resources
 E:\projects\lab3_spz\spz_lab3\spz_lab3\obj\Debug\spz_lab3.csproj.GenerateResource.Cache
 E:\projects\lab3_spz\spz_lab3\spz_lab3\obj\Debug\spz_lab3.exe
 E:\projects\lab3_spz\spz_lab3\spz_lab3\obj\Debug\spz_lab3.pdb
+E:\projects\lab3_spz\spz_lab3\spz_lab3\obj\Debug\spz_lab3.MainForm.resources

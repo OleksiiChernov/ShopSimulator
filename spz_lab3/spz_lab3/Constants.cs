@@ -44,6 +44,9 @@ namespace spz_lab3
             }
         }
 
+        public const string InventoryModeName = "Inventory mode";
+        public const string NormalModeName = "Normal mode";
+
         public const int MinThreadSleep = 5000;
         public const int MaxThreadSleep = 60000;
         public const int TimerBaseTime = 150000;
