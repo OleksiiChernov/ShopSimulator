@@ -38,6 +38,11 @@ namespace spz_lab3.Controllers
         private Task _inventoryModeSimulator;
         private System.Timers.Timer _selector;
 
+        private List<string> _normalModeLogList;
+        private List<string> _normalModeLastLogList;
+        private List<string> _inventoryModeLogList;
+        private List<string> _inventoryModeLastLogList;
+
         #endregion
 
 
@@ -45,6 +50,11 @@ namespace spz_lab3.Controllers
 
         public ShopController()
         {
+            _inventoryModeLogList = new List<string>();
+            _inventoryModeLastLogList = new List<string>();
+            _normalModeLogList = new List<string>();
+            _normalModeLastLogList = new List<string>();
+
             _mode = ShopMode.Normal;
             _storageController = new ProductStorage();
             _storageController.OnNewLog += (sender, args) => OnNewLogGenerated(this, args); 
@@ -173,6 +183,16 @@ namespace spz_lab3.Controllers
             {
                 OnModeChanged(this, new NewLogEventArgs(modeName));
             }
+
+            if (mode == ShopMode.Normal)
+            {
+                _normalModeLastLogList = new List<string>();
+            }
+            else
+            {
+                _inventoryModeLastLogList = new List<string>();
+            }
+
             InitNewLog("Set mode: " + modeName);
         }
 
@@ -205,6 +225,16 @@ namespace spz_lab3.Controllers
         {
             if (null != OnNewLogGenerated && !string.IsNullOrWhiteSpace(message))
             {
+                if (_mode == ShopMode.Normal)
+                {
+                    _normalModeLogList?.Add(message);
+                    _normalModeLastLogList?.Add(message);
+                }
+                else
+                {
+                    _inventoryModeLogList?.Add(message);
+                    _inventoryModeLastLogList?.Add(message);
+                }
                 OnNewLogGenerated(this, new NewLogEventArgs(message));
             }
         }
@@ -216,5 +246,10 @@ namespace spz_lab3.Controllers
         public EventHandler<NewLogEventArgs> OnNewLogGenerated { get; set; }
         public EventHandler<NewLogEventArgs> OnModeChanged { get; set; }
         public EventHandler<NewLogEventArgs> OnCashChanged { get; set; }
+
+        public List<string> NormalModeLog => _normalModeLogList;
+        public List<string> NormalModeLastLog => _normalModeLastLogList;
+        public List<string> InventoryModeLog => _inventoryModeLogList;
+        public List<string> InventoryModeLastLog => _inventoryModeLastLogList;
     }
 }

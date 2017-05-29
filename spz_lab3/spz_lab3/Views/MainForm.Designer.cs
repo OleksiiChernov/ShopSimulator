@@ -40,6 +40,7 @@
             this.normalLogButton = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cashLabel = new System.Windows.Forms.Label();
+            this.generateMainLogButton = new System.Windows.Forms.Button();
             this.shopModes.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -115,6 +116,7 @@
             this.inventoryLogButton.TabIndex = 1;
             this.inventoryLogButton.Text = "Generate inventory mode log";
             this.inventoryLogButton.UseVisualStyleBackColor = true;
+            this.inventoryLogButton.Click += new System.EventHandler(this.inventoryLogButton_Click);
             // 
             // inventoryLastLogButton
             // 
@@ -124,6 +126,7 @@
             this.inventoryLastLogButton.TabIndex = 3;
             this.inventoryLastLogButton.Text = "Generate last inventory mode log";
             this.inventoryLastLogButton.UseVisualStyleBackColor = true;
+            this.inventoryLastLogButton.Click += new System.EventHandler(this.inventoryLastLogButton_Click);
             // 
             // normalLastLogButton
             // 
@@ -133,6 +136,7 @@
             this.normalLastLogButton.TabIndex = 4;
             this.normalLastLogButton.Text = "Generate last normal mode log";
             this.normalLastLogButton.UseVisualStyleBackColor = true;
+            this.normalLastLogButton.Click += new System.EventHandler(this.normalLastLogButton_Click);
             // 
             // normalLogButton
             // 
@@ -142,6 +146,7 @@
             this.normalLogButton.TabIndex = 5;
             this.normalLogButton.Text = "Generate normal mode log";
             this.normalLogButton.UseVisualStyleBackColor = true;
+            this.normalLogButton.Click += new System.EventHandler(this.normalLogButton_Click);
             // 
             // groupBox2
             // 
@@ -163,11 +168,22 @@
             this.cashLabel.TabIndex = 0;
             this.cashLabel.Text = "100";
             // 
+            // generateMainLogButton
+            // 
+            this.generateMainLogButton.Location = new System.Drawing.Point(428, 104);
+            this.generateMainLogButton.Name = "generateMainLogButton";
+            this.generateMainLogButton.Size = new System.Drawing.Size(108, 23);
+            this.generateMainLogButton.TabIndex = 6;
+            this.generateMainLogButton.Text = "Generate main log";
+            this.generateMainLogButton.UseVisualStyleBackColor = true;
+            this.generateMainLogButton.Click += new System.EventHandler(this.generateMainLogButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(558, 376);
+            this.Controls.Add(this.generateMainLogButton);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.normalLogButton);
             this.Controls.Add(this.normalLastLogButton);
@@ -202,6 +218,7 @@
         private System.Windows.Forms.Button normalLogButton;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label cashLabel;
+        private System.Windows.Forms.Button generateMainLogButton;
     }
 }
 
